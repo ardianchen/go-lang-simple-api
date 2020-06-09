@@ -4,23 +4,29 @@ import (
 	"log"
 
 	"github.com/ardianchen/simple-api/src/database"
-	"github.com/jinzhu/gorm"
 )
 
 type User struct {
-	gorm.DB
-	Id    int    `json:"id"`
+	// gorm.DB
+	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
 
-func GetUser() ([]User, error) {
+func GetUser() []User {
 	var users []User
 	db := database.InitDb()
 	if err := db.Find(&users).Error; err != nil {
 		log.Fatalln(err)
 	}
-	return users, nil
+	return users
+}
+
+func InsertUser(userData map[string]interface{}) error {
+	// var users []User
+	db := database.InitDb()
+	db.Create(&userData)
+	return nil
 }
 
 // // memperbaharui data user

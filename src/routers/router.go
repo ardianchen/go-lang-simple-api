@@ -33,7 +33,7 @@ func SetupRouter() *gin.Engine {
 	v1.Use(middlewares.UserMiddlewares())
 	{
 		v1.GET("user-list", apiController.UserList)
-		// v1.POST("user-list", apiController.UserList)
+		v1.POST("user-list", apiController.CreateUser)
 	}
 
 	return r
