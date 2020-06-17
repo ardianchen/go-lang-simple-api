@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	// gorm.DB
+	// gorm.Model
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Email string `json:"email"`
@@ -22,11 +22,15 @@ func GetUser() []User {
 	return users
 }
 
-func InsertUser(userData map[string]interface{}) error {
-	// var users []User
+func InsertUser(UserData interface{}) string {
+	// func InsertUser(userData map[string]interface{}) error {
+	// var users User
+	// log.Fatalln(UserData)
 	db := database.InitDb()
-	db.Create(&userData)
-	return nil
+	// db.Create(&userData)
+	// a := User{Name: UserData.name, Email: userData.email}
+	log.Fatalln(db.Create(&UserData))
+	return "ok" //nil
 }
 
 // // memperbaharui data user
