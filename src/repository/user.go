@@ -25,11 +25,12 @@ func GetUser() []User {
 func InsertUser(UserData interface{}) string {
 	// func InsertUser(userData map[string]interface{}) error {
 	// var users User
-	// log.Fatalln(UserData)
+
+	log.Fatalln(UserData)
 	db := database.InitDb()
 	// db.Create(&userData)
-	// a := User{Name: UserData.name, Email: userData.email}
-	log.Fatalln(db.Create(&UserData))
+	// a := User{Name: UserData.Name, Email: userData.email}
+	log.Fatalln(db.Create(UserData))
 	return "ok" //nil
 }
 

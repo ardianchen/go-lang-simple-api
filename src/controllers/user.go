@@ -1,7 +1,10 @@
 package controllers
 
 import (
+	"log"
+
 	res "github.com/ardianchen/simple-api/src/apiHelpers"
+	"github.com/ardianchen/simple-api/src/database"
 	userRepo "github.com/ardianchen/simple-api/src/repository"
 	"github.com/gin-gonic/gin"
 )
@@ -18,8 +21,9 @@ func UserList(c *gin.Context) {
 }
 
 func CreateUser(c *gin.Context) {
-	var users *userRepo.User
+	var users userRepo.User
 	c.ShouldBindJSON(&users)
+	// fmt.Printf("%+v", &users)
 	// name := c.PostFormMap("name")
 	// email := c.PostFormMap("email")
 	// users.Name = name
@@ -28,14 +32,20 @@ func CreateUser(c *gin.Context) {
 	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	// 	return
 	// }
-	// fmt.Printf(users.Name)
+	// fmt.Printf(users)
 	// fmt.Printf("name: %v; email: %v", name, email)
 	// log.Fatalln(users)
-	a := userRepo.User{
-		Name:  users.Name,
-		Email: users.Email}
+	// a := map[string]interface{}{
+	// 	"name":  users.Name,
+	// 	"email": users.Email,
+	// }
+	db := database.InitDb()
+	log.Fatalln(db.Create(&users))
+	// db.Create(&userData)
+	// a := User{Name: UserData.Name, Email: userData.email}
+
 	// log.Fatalln(a)
-	userRepo.InsertUser(&a)
+	// userRepo.InsertUser(a)
 	// c.JSON(http.StatusOK, gin.H{
 	// 	"name":  user.Name,
 	// 	"email": user.Email,
